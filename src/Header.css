@@ -1,0 +1,14 @@
+h1 {
+    text-align: center;
+    font-size: 7rem;
+    font-weight: 200;
+    color: white;
+    background-color: dimgray;
+    margin: 0;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+  
+header {
+    border-bottom: 1px solid white;
+}

@@ -1,0 +1,31 @@
+.note {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    border: 1px solid white;
+    color: white;
+    
+}
+
+.noteTitle {
+    font-size: 2rem;
+}
+
+.noteInfo {
+    font-size: 1.5rem;
+}
+
+.noteText {
+    font-size: 1.5rem;
+    padding-right: 30rem;
+}
+
+#deleteNote {
+    align-self: flex-start;
+    font-size: 1.6rem;
+    color: white;
+    padding: 1rem;
+    background-color: dimgray;
+    border: 1px solid white;
+}
