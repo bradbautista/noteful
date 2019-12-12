@@ -88,52 +88,7 @@ class App extends Component {
               <Route path='/folder/:folderId' component={NoteArea} />
               <Route path='/note/:noteId' component={Nav} />
               <Route path='/note/:noteId' component={NoteArea} />
-            </main>        
-          {/* <Route
-              exact path='/'
-              render={(props) => {
-                return (
-                  <main>
-                    <Nav
-                      {...props}
-                    />
-                    <NoteArea
-                      {...props}
-                    />
-                  </main>
-                )
-              }}
-          />
-          <Route
-              path='/folder/:folderId'
-              render={(props) => {
-                return (
-                  <main>
-                  <Nav
-                      {...props}
-                  />
-                  <NoteArea
-                      {...props}
-                  />
-                  </main>
-                )
-              }}
-          />
-          <Route
-              path='/note/:noteId'
-              render={(props) => {
-                return (
-                  <main>
-                  <Nav
-                    {...props}
-                  />
-                  <Note
-                    {...props}
-                  />
-                  </main>
-                )
-              }}
-          /> */}
+            </main>
           </Switch>
         </div>
       </NotesContext.Provider>
