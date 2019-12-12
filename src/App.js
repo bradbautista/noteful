@@ -87,7 +87,7 @@ class App extends Component {
               <Route path='/folder/:folderId' component={Nav} />
               <Route path='/folder/:folderId' component={NoteArea} />
               <Route path='/note/:noteId' component={Nav} />
-              <Route path='/note/:noteId' component={NoteArea} />
+              <Route path='/note/:noteId' component={Note} />
             </main>
           </Switch>
         </div>
