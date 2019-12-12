@@ -7,7 +7,6 @@ export default class Header extends Component {
     return (
         <header>
         <Link to='/'><h1>Noteful</h1></Link>
-        {/* <h1>Noteful</h1> */}
         </header>
     )
   }
