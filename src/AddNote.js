@@ -50,10 +50,6 @@ class AddNote extends Component {
             content: this.state.notetext.value,
         }
 
-        console.log(note);
-
-        //   this.setState({ error: null })
-
         fetch(`http://localhost:9090/notes/`, {
             method: 'POST',
             body: JSON.stringify(note),
@@ -159,9 +155,6 @@ class AddNote extends Component {
             className="AddNote__form"
             onSubmit={this.handleSubmit}
         >
-            {/* <div className='AddBookmark__error' role='alert'>
-            {error && <p>{error.message}</p>}
-            </div> */}
 
             {/* NAME INPUT */}
             <div>

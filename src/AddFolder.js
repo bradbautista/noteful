@@ -34,10 +34,6 @@ class AddFolder extends Component {
             name: this.state.foldername.value,
         }
 
-        console.log(folder);
-
-        // this.setState({ error: null })
-
         fetch(`http://localhost:9090/folders/`, {
             method: 'POST',
             body: JSON.stringify(folder),
@@ -97,9 +93,6 @@ class AddFolder extends Component {
             className="AddFolder__form"
             onSubmit={this.handleSubmit}
         >
-            {/* <div className='AddBookmark__error' role='alert'>
-            {error && <p>{error.message}</p>}
-            </div> */}
 
             <div>
             <label htmlFor="folderName">
