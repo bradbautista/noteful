@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import Header from './Header'
-import Nav from './Nav'
-import NoteArea from './NoteArea'
-import Note from './Note'
-import NotesContext from './NotesContext'
-import './App.css'
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import Header from './Header';
+import Nav from './Nav';
+import NoteArea from './NoteArea';
+import Note from './Note';
+import AddFolder from './AddFolder';
+import AddNote from './AddNote';
+import NotesContext from './NotesContext';
+import './App.css';
 
 class App extends Component {
 
@@ -80,16 +82,19 @@ class App extends Component {
       <NotesContext.Provider value={contextValue}>
         <div className="App">
           <Header/>
-          <Switch>
-            <main>
+          <main>
               <Route exact path='/' component={Nav} />
               <Route exact path='/' component={NoteArea} />
               <Route path='/folder/:folderId' component={Nav} />
               <Route path='/folder/:folderId' component={NoteArea} />
               <Route path='/note/:noteId' component={Nav} />
               <Route path='/note/:noteId' component={Note} />
-            </main>
-          </Switch>
+              {/* In keeping with above, will probably need two of these each for AddFolder and AddNote */}
+              <Route path='/add-folder' component={Nav} />
+              <Route path='/add-folder' component={AddFolder} />
+              <Route path='/add-note' component={Nav} />
+              <Route path='/add-note' component={AddNote} />
+          </main>
         </div>
       </NotesContext.Provider>
     );

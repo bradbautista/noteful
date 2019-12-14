@@ -24,7 +24,8 @@ class Nav extends Component {
                     <ul className="folderList">
                         {this.context.folders.map(folder =>
                         // If the ID of the folder being mapped matches the
-                        // folderID param, class it as selected
+                        // folderID param, class it as selected to apply
+                        // CSS letting user know it has been selected
                         (folderId === folder.id)
                         ?   <li className="selectedFolder" key={folder.id}>
                                 <Link to={`/folder/${folder.id}`}>
@@ -38,7 +39,9 @@ class Nav extends Component {
                             </li>
                         )}
                     </ul>
-                    <button name="addFolder" id="addFolder">Add folder</button>
+                    <Link to={'/add-folder'} className="addFolder__btn">
+                        Add folder
+                    </Link>
                 </nav>
 
             // If a note has been selected, display the name of the folder it

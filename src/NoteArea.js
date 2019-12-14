@@ -37,7 +37,10 @@ export default class NoteArea extends Component {
                         )}
                     </ul>
 
-                <button name="addNote" id="addNote">Add note</button>
+                    <Link to={'/add-note'} className="addNote__btn">
+                    Add Note
+                    </Link>
+
                 </section>
 
             // If a folder has been selected, return only the notes
@@ -59,7 +62,11 @@ export default class NoteArea extends Component {
                         </li>
                     )}
                 </ul>
-                <button name="addNote" id="addNote">Add note</button>
+
+                <Link to={'/add-note'} className="addNote__btn">
+                    Add Note
+                </Link>
+                
                 </section>
         )
     }

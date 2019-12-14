@@ -6,12 +6,11 @@
     padding-top: 1rem;
 }
 
-#addNote {
-    margin-left: 1rem;
-    margin-bottom: 2rem;
-    align-self: flex-start;
+.addNote__btn {
     font-size: 1.6rem;
     color: white;
+    align-self: flex-start;
+    margin-left: 1rem;
     padding: 1rem;
     background-color: dimgray;
     border: 1px solid white;

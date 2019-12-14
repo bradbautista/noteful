@@ -33,13 +33,14 @@ li {
     margin-bottom: 1rem;
 }
 
-#addFolder {
+.addFolder__btn {
     font-size: 1.6rem;
     color: white;
     align-self: flex-end;
     padding: 1rem;
     background-color: dimgray;
     border: 1px solid white;
+    margin-bottom: 3rem;
 }
 
 #backButton {

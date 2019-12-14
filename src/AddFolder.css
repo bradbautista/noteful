@@ -1,0 +1,47 @@
+/* If you're looking for the "Add a folder" H3 style, 
+it's defined in App.css in anticipation of reuse on
+Add Note page*/
+
+.AddFolder {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    background-color: dimgray;
+    padding-top: 3rem;
+    padding-left: 1rem;
+}
+
+.AddFolder__heading {
+    padding-left: 3rem;
+    margin-bottom: 1rem;
+}
+
+.AddFolder__form {
+    padding-left: 3rem;
+}
+
+.AddFolder__form label {
+    font-weight: 200;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: white;
+    display: block;
+}
+
+.AddFolder__form input {
+    font-weight: 200;
+    width: 13rem;
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+#cancelAddFolder, #saveAddFolder {
+    font-size: 1.6rem;
+    color: white;
+    align-self: flex-end;
+    padding: 1rem;
+    background-color: dimgray;
+    border: 1px solid white;
+    margin-right: 1rem;
+    margin-bottom: 3rem;
+}
