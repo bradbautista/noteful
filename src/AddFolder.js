@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NotesContext from './NotesContext';
 import ValidationError from './ValidationError';
+import PropTypes from 'prop-types';
 import './AddFolder.css';
 
 class AddFolder extends Component {
@@ -148,5 +149,8 @@ class AddFolder extends Component {
     }   
 }
 
+NotesContext.propTypes = {
+    value: PropTypes.object,
+}
 
 export default AddFolder

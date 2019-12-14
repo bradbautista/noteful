@@ -8,6 +8,7 @@ import AddFolder from './AddFolder';
 import AddNote from './AddNote';
 import NotesContext from './NotesContext';
 import FoldersError from './FoldersError';
+import PropTypes from 'prop-types';
 import './App.css';
 
 class App extends Component {
@@ -91,7 +92,6 @@ class App extends Component {
               <Route path='/folder/:folderId' component={NoteArea} />
               <Route path='/note/:noteId' component={Nav} />
               <Route path='/note/:noteId' component={Note} />
-              {/* In keeping with above, will probably need two of these each for AddFolder and AddNote */}
               <Route path='/add-folder' component={Nav} />
               <Route path='/add-folder' component={AddFolder} />
               <Route path='/add-note' component={Nav} />
@@ -103,6 +103,10 @@ class App extends Component {
     );
   }
 
+}
+
+NotesContext.Provider.propTypes = {
+  value: PropTypes.object,
 }
 
 export default App;

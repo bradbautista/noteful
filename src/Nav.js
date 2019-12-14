@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom';
-import NotesContext from './NotesContext'
-import './Nav.css'
+import NotesContext from './NotesContext';
+import PropTypes from 'prop-types';
+import './Nav.css';
 
 class Nav extends Component {
 
@@ -60,6 +61,20 @@ class Nav extends Component {
                 </nav>
         )
     }
+}
+
+Nav.defaultProps = {
+    noteId: '1',
+    folderId: '1'
+}
+  
+Nav.propTypes = {
+    noteId: PropTypes.string.isRequired,
+    folderId: PropTypes.string.isRequired,
+};
+
+NotesContext.Consumer.propTypes = {
+    value: PropTypes.object,
 }
 
 export default withRouter(Nav);

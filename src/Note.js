@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
 import NotesContext from './NotesContext'
 import './Note.css'
 
@@ -42,3 +43,15 @@ export default class Note extends Component {
         )
     }
 }
+
+NotesContext.propTypes = {
+    value: PropTypes.object,
+}
+
+Note.defaultProps = {
+    noteId: '1',
+}
+  
+Note.propTypes = {
+    noteId: PropTypes.string.isRequired,
+};

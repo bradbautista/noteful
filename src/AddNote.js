@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NotesContext from './NotesContext'
 import ValidationError from './ValidationError'
-import FoldersError from './FoldersError'
+import PropTypes from 'prop-types';
 import './AddNote.css'
 
 class AddNote extends Component {
@@ -25,8 +25,6 @@ class AddNote extends Component {
     }
   
     static contextType = NotesContext;
-
-
   
     handleSubmit = (e) => {
 
@@ -124,14 +122,11 @@ class AddNote extends Component {
     // default values, SO, wait until we've got context data
     // available, then set it to the first folder name that appears
 
-    // WILL NEED ERROR HANDLER HERE
-
     componentDidMount() {
-            this.setState({foldername: {value: this.context.folders[0].name, optionid: this.context.folders[0].id}})
 
-        // setTimeout(() => {
-        //     this.setState({foldername: {value: this.context.folders[0].name, optionid: this.context.folders[0].id}})
-        //   }, 600);    
+        setTimeout(() => {
+            this.setState({foldername: {value: this.context.folders[0].name, optionid: this.context.folders[0].id}})
+        }, 600);    
     }
   
     render() {
@@ -252,5 +247,8 @@ class AddNote extends Component {
     }   
 }
 
+NotesContext.propTypes = {
+    value: PropTypes.object,
+}
 
 export default AddNote
