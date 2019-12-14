@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import NotesContext from './NotesContext'
 import ValidationError from './ValidationError'
+import FoldersError from './FoldersError'
 import './AddNote.css'
 
 class AddNote extends Component {
@@ -17,7 +18,8 @@ class AddNote extends Component {
                 touched: false,
             },
             foldername: {
-                value: ''
+                value: '',
+                optionid: '',
             },
         }
     }
@@ -26,47 +28,62 @@ class AddNote extends Component {
 
 
   
-    handleSubmit = e => {
-      e.preventDefault()
-      console.log('Wire me daddy')
-      // get the form fields from the event
-    //   const { title, url, description, rating } = e.target
-    //   const bookmark = {
-    //     title: title.value,
-    //     url: url.value,
-    //     description: description.value,
-    //     rating: rating.value,
-    //   }
-    //   this.setState({ error: null })
-    //   fetch(config.API_ENDPOINT, {
-    //     method: 'POST',
-    //     body: JSON.stringify(bookmark),
-    //     headers: {
-    //       'content-type': 'application/json',
-    //       'authorization': `bearer ${config.API_KEY}`
-    //     }
-    //   })
-    //     .then(res => {
-    //       if (!res.ok) {
-    //         // get the error message from the response,
-    //         return res.json().then(error => {
-    //           // then throw it
-    //           throw error
-    //         })
-    //       }
-    //       return res.json()
-    //     })
-    //     .then(data => {
-    //       title.value = ''
-    //       url.value = ''
-    //       description.value = ''
-    //       rating.value = ''
-    //       this.props.history.push('/')
-    //       this.context.AddBookmark(data)
-    //     })
-    //     .catch(error => {
-    //       this.setState({ error })
-    //     })
+    handleSubmit = (e) => {
+
+        e.preventDefault()
+        
+        //  generate a (probably) unique ID
+        let uid = Math.floor((Math.random() * 9999999) * (Math.random() * 9999999) * (Math.random() * 9999999))
+
+        // Annoying date stuff
+        let currentdate = new Date();
+        let datetime = "Last modified: " + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+
+        const note = {
+            id: uid.toString(),
+            name: this.state.notename.value,
+            modified: datetime,
+            folderId: this.state.foldername.optionid,
+            content: this.state.notetext.value,
+        }
+
+        console.log(note);
+
+        //   this.setState({ error: null })
+
+        fetch(`http://localhost:9090/notes/`, {
+            method: 'POST',
+            body: JSON.stringify(note),
+            headers: {
+            'content-type': 'application/json',
+            }
+        })
+        .then(res => {
+            if (!res.ok) {
+                // get the error message from the response,
+                return res.json().then(error => {
+                // then throw it
+                throw error
+                })
+            }
+            return res.json()
+        })
+        .then(data => {
+            this.setState({
+                notename: {value: '', touched: false},
+                notetext: {value: '', touched: false},
+            });
+            this.props.history.push('/')
+            window.location.reload(false);
+        })
+        .catch(error => {
+            alert(error.toString());
+        })
     }
 
     updateName(name) {
@@ -77,8 +94,13 @@ class AddNote extends Component {
         this.setState({notetext: {value: text, touched: true}});
     }
 
-    updateFolder(selection) {
-        this.setState({foldername: {value: selection}});
+    updateFolder(e) {
+
+        let index = e.target.selectedIndex;
+        let optionElement = e.target.childNodes[index];
+        let option = optionElement.getAttribute('id');
+
+        this.setState({foldername: {value: e.target.value, optionid: option}});
     }
 
     validateNoteName(fieldValue) {
@@ -102,34 +124,42 @@ class AddNote extends Component {
     // default values, SO, wait until we've got context data
     // available, then set it to the first folder name that appears
 
+    // WILL NEED ERROR HANDLER HERE
+
     componentDidMount() {
-        setTimeout(() => {
-            this.setState({foldername: {value: this.context.folders[0].name}})
-          }, 400);    
+            this.setState({foldername: {value: this.context.folders[0].name, optionid: this.context.folders[0].id}})
+
+        // setTimeout(() => {
+        //     this.setState({foldername: {value: this.context.folders[0].name, optionid: this.context.folders[0].id}})
+        //   }, 600);    
     }
   
     render() {
 
+
+
+    // Establish asterisk component
     const Required = () => (
     <span className="inputField__required">*</span>
     )
 
+    // Define options for our select input
     const folderOptions = this.context.folders.map((folder, i) => {
 
         return (
-        <option value={folder.name} key={folder.id}>
+        <option value={folder.name} key={folder.id} id={folder.id}>
         {folder.name}
         </option>
         )
     })
-
-    // console.log(this.context.folders)
-  
-    // const { error } = this.state
-      
+    
+    // Our form
     return (
+
         <section className="AddNote">
+
         <h3 className="AddNote__heading">Add a note</h3>
+
         <form
             className="AddNote__form"
             onSubmit={this.handleSubmit}
@@ -137,6 +167,8 @@ class AddNote extends Component {
             {/* <div className='AddBookmark__error' role='alert'>
             {error && <p>{error.message}</p>}
             </div> */}
+
+            {/* NAME INPUT */}
             <div>
             <label htmlFor="noteName">
                 Note title
@@ -156,8 +188,8 @@ class AddNote extends Component {
             )}
             </div>
             
+            {/* SELECT INPUT */}
             <div>
-
             <label htmlFor="folderSelect">
                 Choose a folder
                 {' '}
@@ -165,14 +197,14 @@ class AddNote extends Component {
             </label>
             <select 
                 name="folders" 
-                id="folderSelect" 
-                onChange={e => this.updateFolder(e.target.value)}
+                id="folderSelect"   
+                onChange={e => this.updateFolder(e)}
             >
                 {folderOptions}
             </select>
-                
             </div>
 
+            {/* NOTE TEXT INPUT */}
             <div>
             <label htmlFor="noteText">
                 Note text
@@ -191,13 +223,17 @@ class AddNote extends Component {
             )}
             </div>
 
-
+            {/* BUTTONS */}
             <div className="AddNote__buttons">
             <button 
                 type="submit" 
                 name="saveAddNote" 
                 id="saveAddNote"
-                onClick={() => {console.log(this.context.folders[0])}}
+                onClick={(e) => {this.handleSubmit(e)}}
+                disabled={
+                    this.validateNoteText() ||
+                    this.validateNoteName()
+                }
             >
                 Save
             </button>

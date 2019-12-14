@@ -7,6 +7,7 @@ import Note from './Note';
 import AddFolder from './AddFolder';
 import AddNote from './AddNote';
 import NotesContext from './NotesContext';
+import FoldersError from './FoldersError';
 import './App.css';
 
 class App extends Component {
@@ -83,6 +84,7 @@ class App extends Component {
         <div className="App">
           <Header/>
           <main>
+              <FoldersError>
               <Route exact path='/' component={Nav} />
               <Route exact path='/' component={NoteArea} />
               <Route path='/folder/:folderId' component={Nav} />
@@ -94,6 +96,7 @@ class App extends Component {
               <Route path='/add-folder' component={AddFolder} />
               <Route path='/add-note' component={Nav} />
               <Route path='/add-note' component={AddNote} />
+              </FoldersError>
           </main>
         </div>
       </NotesContext.Provider>

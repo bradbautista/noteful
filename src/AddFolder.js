@@ -21,47 +21,46 @@ class AddFolder extends Component {
     
     // Form submission logic
     
-    handleSubmit = e => {
-      e.preventDefault()
-      console.log('Wire me daddy')
-      // get the form fields from the event
-    //   const { title, url, description, rating } = e.target
-    //   const bookmark = {
-    //     title: title.value,
-    //     url: url.value,
-    //     description: description.value,
-    //     rating: rating.value,
-    //   }
-    //   this.setState({ error: null })
-    //   fetch(config.API_ENDPOINT, {
-    //     method: 'POST',
-    //     body: JSON.stringify(bookmark),
-    //     headers: {
-    //       'content-type': 'application/json',
-    //       'authorization': `bearer ${config.API_KEY}`
-    //     }
-    //   })
-    //     .then(res => {
-    //       if (!res.ok) {
-    //         // get the error message from the response,
-    //         return res.json().then(error => {
-    //           // then throw it
-    //           throw error
-    //         })
-    //       }
-    //       return res.json()
-    //     })
-    //     .then(data => {
-    //       title.value = ''
-    //       url.value = ''
-    //       description.value = ''
-    //       rating.value = ''
-    //       this.props.history.push('/')
-    //       this.context.AddBookmark(data)
-    //     })
-    //     .catch(error => {
-    //       this.setState({ error })
-    //     })
+    handleSubmit = (e) => {
+
+        e.preventDefault()
+        
+        //  generate a (probably) unique ID
+        let uid = Math.floor((Math.random() * 9999999) * (Math.random() * 9999999) * (Math.random() * 9999999))
+
+        const folder = {
+            id: uid.toString(),
+            name: this.state.foldername.value,
+        }
+
+        console.log(folder);
+
+        // this.setState({ error: null })
+
+        fetch(`http://localhost:9090/folders/`, {
+            method: 'POST',
+            body: JSON.stringify(folder),
+            headers: {
+            'content-type': 'application/json',
+            }
+        })
+        .then(res => {
+            if (!res.ok) {
+                // Get the error message from the response,
+                return res.json().then(error => {
+                // then throw it
+                throw error
+                })
+            }
+            return res.json()
+        })
+        .then(data => {
+          this.setState({foldername: {value: '', touched: false}});
+          window.location.reload(false);
+        })
+        .catch(error => {
+            alert(error.toString());
+        })
     }
 
     
@@ -111,7 +110,7 @@ class AddFolder extends Component {
                 type="text"
                 name="folderName"
                 id="folderName"
-                placeholder="New folder"
+                value={this.state.foldername.value}
                 onChange={e => this.updateName(e.target.value)}
                 required
             />
@@ -126,7 +125,10 @@ class AddFolder extends Component {
                 type="submit" 
                 name="saveAddFolder" 
                 id="saveAddFolder"
-                onClick={() => {console.log('Wire me, daddy')}}
+                onClick={(e) => {this.handleSubmit(e)}}
+                disabled={
+                    this.validateFolderName()
+                }
             >
                 Save
             </button>
