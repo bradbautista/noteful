@@ -53,7 +53,8 @@ class AddFolder extends Component {
         })
         .then(data => {
           this.setState({foldername: {value: '', touched: false}});
-          this.context.updateLists()
+          this.context.updateLists();
+          this.props.history.push('/');
         })
         .catch(error => {
             alert(error.toString());

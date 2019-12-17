@@ -102,8 +102,6 @@ class App extends Component {
       folders: this.state.folders,
       notes: this.state.notes,
       deleteNote: this.deleteNote,
-      // addFolder: this.addFolder,
-      // addNote: this.addNote,
       updateLists: this.updateLists,
     }
 
