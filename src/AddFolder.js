@@ -53,7 +53,7 @@ class AddFolder extends Component {
         })
         .then(data => {
           this.setState({foldername: {value: '', touched: false}});
-          window.location.reload(false);
+          this.context.addFolder(folder.id)
         })
         .catch(error => {
             alert(error.toString());

@@ -73,7 +73,7 @@ class AddNote extends Component {
                 notetext: {value: '', touched: false},
             });
             this.props.history.push('/')
-            window.location.reload(false);
+            this.context.addNote(note.id)
         })
         .catch(error => {
             alert(error.toString());

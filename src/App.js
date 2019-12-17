@@ -71,6 +71,54 @@ class App extends Component {
     .catch(err => {console.error({err})})
   }
 
+  addFolder = () => {
+
+    let foldersEndpoint = 'http://localhost:9090/folders';
+    let notesEndpoint = 'http://localhost:9090/notes';
+
+    Promise.all([
+      fetch(foldersEndpoint),
+      fetch(notesEndpoint)
+    ])
+    .then(([folders, notes]) => {
+        if (!folders.ok) 
+          return notes.json().then(e => Promise.reject(e));
+        if (!notes.ok) 
+          return notes.json().then(e => Promise.reject(e));
+        return Promise.all([folders.json(), notes.json()]);
+    })
+    .then(([folders, notes]) => {
+        this.setState({folders, notes})
+      }
+    )
+    .catch(err => {console.error({err})})
+
+  }
+
+  addNote = () => {
+
+    let foldersEndpoint = 'http://localhost:9090/folders';
+    let notesEndpoint = 'http://localhost:9090/notes';
+
+    Promise.all([
+      fetch(foldersEndpoint),
+      fetch(notesEndpoint)
+    ])
+    .then(([folders, notes]) => {
+        if (!folders.ok) 
+          return notes.json().then(e => Promise.reject(e));
+        if (!notes.ok) 
+          return notes.json().then(e => Promise.reject(e));
+        return Promise.all([folders.json(), notes.json()]);
+    })
+    .then(([folders, notes]) => {
+        this.setState({folders, notes})
+      }
+    )
+    .catch(err => {console.error({err})})
+    
+  }
+
 
   render() {
 
@@ -78,6 +126,8 @@ class App extends Component {
       folders: this.state.folders,
       notes: this.state.notes,
       deleteNote: this.deleteNote,
+      addFolder: this.addFolder,
+      addNote: this.addNote,
     }
 
     return (
