@@ -73,7 +73,7 @@ class AddNote extends Component {
                 notetext: {value: '', touched: false},
             });
             this.props.history.push('/')
-            this.context.addNote(note.id)
+            this.context.updateLists()
         })
         .catch(error => {
             alert(error.toString());
